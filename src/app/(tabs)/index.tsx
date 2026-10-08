@@ -1,12 +1,22 @@
-import { Link } from "expo-router";
-import { Text, View } from "react-native";
+import { HomeHeader } from "@/components/HomeHeader";
+import { colors } from "@/constants/theme";
+import { LinearGradient } from "expo-linear-gradient";
+import { StyleSheet } from "react-native";
 
 export default function HomeScreen() {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center", gap: 16 }}>
-      <Text>Home</Text>
-      <Link href="/same-day">Same-Day Delivery</Link>
-      <Link href="/haul">Haul</Link>
-    </View>
+    <LinearGradient
+      colors={[colors.homeGradientTop, colors.homeGradientBottom, colors.background]}
+      locations={[0, 0.4, 0.7]}
+      style={styles.screen}
+    >
+      <HomeHeader />
+    </LinearGradient>
   );
 }
+
+const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+  },
+});
