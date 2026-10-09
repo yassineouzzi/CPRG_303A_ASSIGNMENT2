@@ -32,7 +32,7 @@ export default function CartScreen() {
           </View>
           <View style={styles.emptyText}>
             <Text style={styles.emptyTitle}>Your Amazon Cart is empty</Text>
-            <Text style={styles.echo}>Echo...Echo...</Text>
+            <Text style={styles.echo}>Oups!</Text>
             <Text style={styles.link}>Pick up where you left off</Text>
           </View>
         </View>

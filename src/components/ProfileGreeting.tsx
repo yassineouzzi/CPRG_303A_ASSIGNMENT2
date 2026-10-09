@@ -1,6 +1,6 @@
 import { colors, fontSize, spacing } from "@/constants/theme";
 import { Ionicons } from "@expo/vector-icons";
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 
 type ProfileGreetingProps = {
   name: string;
@@ -23,13 +23,11 @@ export function ProfileGreeting({ name, language = "EN" }: ProfileGreetingProps)
           <View style={styles.dot} />
         </View>
         <View style={styles.language}>
-          <View style={styles.flag}>
-            <View style={styles.flagRed} />
-            <View style={styles.flagWhite}>
-              <Ionicons name="leaf" size={10} color={colors.badgeRed} />
-            </View>
-            <View style={styles.flagRed} />
-          </View>
+          <Image
+            source={require("../../assets/images/canada_flag.jpg")}
+            style={styles.flag}
+            resizeMode="cover"
+          />
           <Text style={styles.languageText}>{language}</Text>
         </View>
       </View>
@@ -57,13 +55,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.badgeRed,
   },
   language: { flexDirection: "row", alignItems: "center", gap: spacing.xs },
-  flag: { flexDirection: "row", width: 30, height: 20 },
-  flagRed: { flex: 1, backgroundColor: colors.badgeRed },
-  flagWhite: {
-    flex: 2,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+  flag: { width: 30, height: 20, borderRadius: 2 },
   languageText: { fontSize: fontSize.md, color: colors.textPrimary },
 });
