@@ -1,56 +1,84 @@
-# Welcome to your Expo app 👋
+# Amazon.ca App Clone
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+CPRG 303A, Assignment 2: Advanced Multi-Screen Mobile Application with Collaborative Navigation.
 
-## Get started
+A React Native (Expo, TypeScript) recreation of five screens from the Amazon.ca mobile app, built with Expo Router. All content is mock data; nothing is connected to Amazon.
 
-1. Install dependencies
+Author: Yassine OUZZI (GitHub: `yassineouzzi`), solo project.
 
-   ```bash
-   npm install
-   ```
+## Reference screens
 
-2. Start the app
+The app was built against screenshots taken from the Amazon.ca phone app. I blurred some personal details in them.
 
-   ```bash
-   npx expo start
-   ```
+| Screen | Reference | Route |
+| --- | --- | --- |
+| Home | `reference/home.jpg` | `/(tabs)/index` |
+| Same-Day Store | `reference/same-day.jpg` | `/same-day` |
+| Haul | `reference/haul.jpg` | `/haul` |
+| Profile (You) | `reference/profile.jpg` | `/(tabs)/you` |
+| Cart | `reference/cart.jpg` | `/(tabs)/cart` |
 
-In the output, you'll find options to open the app in a
+A sixth screen, Menu (`/(tabs)/menu`), completes the four-icon tab bar.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Navigation
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- **Tabs** (`src/app/(tabs)`): Home, You, Cart, Menu. The active tab shows a black indicator bar and the cart icon shows an item count.
+- **Stack**: the root stack pushes **Same-Day Store** from the Home chip (and from the Menu list) with a back arrow.
+- **Modal**: **Haul** opens as a full-screen modal from the Home chip and closes with the X. It has its own five-icon tab bar.
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+Root Stack
+├── (tabs)  Tabs: index, you, cart, menu
+├── same-day  (stack push, back arrow)
+└── haul      (full-screen modal, close button)
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Project structure
 
-### Other setup steps
+```
+src/
+├── app/            Screens and layouts only (Expo Router)
+├── components/     Reusable UI components
+├── constants/      theme.ts (colors, spacing, radius, font sizes), images.ts
+├── data/           Mock data
+└── types/          TypeScript types
+assets/images/      Local images (products/ and the flag)
+```
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+## Components
 
-## Learn more
+| Component | Used by |
+| --- | --- |
+| `SearchBar` | Home, Same-Day, Cart, Profile, Haul, Menu |
+| `TanHeader` | Same-Day, Cart, Profile, Menu |
+| `HomeHeader` | Home |
+| `Pill` | Home chips, Profile shortcuts |
+| `SectionHeader` | Home, Same-Day, Cart, Profile |
+| `ProductCard` (default and store variants) | Home, Same-Day, Haul |
+| `ProductRow` | Home, Same-Day |
+| `CategoryTile` | Same-Day, Haul |
+| `ViewedItemTile` / `ViewedItemGrid` | Cart, Profile |
+| `RatingStars` | Product cards |
+| `ProfileGreeting` | Profile |
+| `HaulHeader`, `HaulBanner`, `HaulTabBar` | Haul |
 
-To learn more about developing your project with Expo, look at the following resources:
+### Component organization rules
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- A component gets its own file when it is reused in two or more places, or when it is large (about 40 to 50 lines or more).
+- Small, single-use pieces stay in the screen file that uses them.
+- Every component has a typed props object (`XxxProps`), named exports, and a PascalCase file name.
+- Screens live in `src/app`; everything else lives outside it.
+- Colors, spacing, radius, and font sizes come from `src/constants/theme.ts`.
+- Icons come from `@expo/vector-icons` (Ionicons) instead of the unicode characters I used in the last assignment, so they scale and are easier to maintain.
+- Lists use stable `id` keys from the data.
 
-## Join the community
+## Images
 
-Join our community of developers creating universal apps.
+- Product images in `assets/images/products/` were cropped from the reference screenshots of the Amazon.ca app, since this is for educational use only.
+- `assets/images/canada_flag.jpg` is a downloaded flag image from google free images.
+- No images are loaded from the network.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+## Tech ressources/dependancies used:
+
+Expo SDK 57, Expo Router, React Native, TypeScript, `expo-linear-gradient`, `@expo/vector-icons`.
