@@ -1,8 +1,8 @@
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import { RatingStars } from "@/components/RatingStars";
 import { colors, fontSize, radius, spacing } from "@/constants/theme";
 import { Product } from "@/types/product";
-import { Ionicons } from "@expo/vector-icons";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 type ProductCardProps = {
   product: Product;
@@ -22,11 +22,7 @@ export function ProductCard({ product, variant = "default", onPress }: ProductCa
       style={[styles.card, isStore ? styles.storeCard : styles.defaultCard]}
     >
       <View>
-        <Image
-          source={product.image}
-          style={isStore ? styles.storeImage : styles.defaultImage}
-          resizeMode="contain"
-        />
+        <Image source={product.image} style={styles.image} resizeMode="contain" />
         {!isStore && discount !== null && (
           <View style={styles.badge}>
             <Text style={styles.badgeText}>-{discount}%</Text>
@@ -68,14 +64,17 @@ export function ProductCard({ product, variant = "default", onPress }: ProductCa
 const styles = StyleSheet.create({
   card: { overflow: "hidden" },
   defaultCard: {
-    width: 165,
+    width: 150,
     backgroundColor: colors.background,
     borderRadius: radius.md,
     padding: spacing.sm,
   },
   storeCard: { width: 160, backgroundColor: colors.cardBg },
-  defaultImage: { width: "100%", height: 149, backgroundColor: colors.cardBg },
-  storeImage: { width: "100%", height: 160, backgroundColor: colors.cardBg },
+  image: {
+    width: "100%",
+    aspectRatio: 1,
+    backgroundColor: colors.cardBg,
+  },
   info: { gap: spacing.xs, padding: spacing.sm },
   badge: {
     position: "absolute",
