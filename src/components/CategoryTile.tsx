@@ -1,9 +1,12 @@
 import { colors, fontSize, radius, spacing } from "@/constants/theme";
-import { Image, Pressable, StyleSheet, Text } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { ComponentProps } from "react";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 type CategoryTileProps = {
   label: string;
-  imageUrl: string;
+  icon?: ComponentProps<typeof Ionicons>["name"];
+  imageUrl?: string;
   backgroundColor?: string;
   width?: number;
   onPress?: () => void;
@@ -11,17 +14,20 @@ type CategoryTileProps = {
 
 export function CategoryTile({
   label,
+  icon,
   imageUrl,
   backgroundColor = colors.storeTileBlue,
-  width = 160,
+  width = 150,
   onPress,
 }: CategoryTileProps) {
   return (
     <Pressable onPress={onPress} style={[styles.container, { width }]}>
-      <Image
-        source={{ uri: imageUrl }}
-        style={[styles.image, { backgroundColor }]}
-      />
+      <View style={[styles.tile, { backgroundColor }]}>
+        {icon && <Ionicons name={icon} size={52} color="#fff" />}
+        {imageUrl && (
+          <Image source={{ uri: imageUrl }} style={styles.image} resizeMode="contain" />
+        )}
+      </View>
       <Text style={styles.label}>{label}</Text>
     </Pressable>
   );
@@ -29,6 +35,13 @@ export function CategoryTile({
 
 const styles = StyleSheet.create({
   container: { alignItems: "center", gap: spacing.sm },
-  image: { width: "100%", height: 100, borderRadius: radius.md },
+  tile: {
+    width: "100%",
+    height: 100,
+    borderRadius: radius.md,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  image: { width: "60%", height: "80%" },
   label: { fontSize: fontSize.md, color: colors.textPrimary, textAlign: "center" },
 });

@@ -16,8 +16,8 @@ export function SearchBar({
   return (
     <View style={styles.row}>
       {onBack && (
-        <Pressable onPress={onBack} hitSlop={8}>
-          <Ionicons name="arrow-back" size={26} color={colors.background} />
+        <Pressable onPress={onBack} hitSlop={10}>
+          <Ionicons name="arrow-back" size={26} color="#fff" />
         </Pressable>
       )}
       <View style={styles.bar}>
@@ -36,26 +36,18 @@ export function SearchBar({
 }
 
 const styles = StyleSheet.create({
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: spacing.md,
-  },
+  row: { flexDirection: "row", alignItems: "center", gap: spacing.md },
   bar: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
     gap: spacing.sm,
-    height: 44,
-    paddingHorizontal: spacing.md,
+    backgroundColor: colors.background,
     borderRadius: radius.pill,
     borderWidth: 1,
     borderColor: colors.border,
-    backgroundColor: colors.background,
+    paddingHorizontal: spacing.md,
+    height: 46,
   },
-  input: {
-    flex: 1,
-    fontSize: fontSize.md,
-    color: colors.textPrimary,
-  },
+  input: { flex: 1, fontSize: fontSize.md, color: colors.textPrimary },
 });

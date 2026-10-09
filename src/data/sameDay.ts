@@ -1,12 +1,20 @@
 import { Product } from "@/types/product";
+import { Ionicons } from "@expo/vector-icons";
+import { ComponentProps } from "react";
 
 const img = (seed: string) => `https://picsum.photos/seed/${seed}/400/400`;
 
-export const sameDayCategories = [
-  { id: "c1", label: "Beauty & Personal Care", imageUrl: img("beauty") },
-  { id: "c2", label: "Grocery", imageUrl: img("grocery") },
-  { id: "c3", label: "Home", imageUrl: img("homegoods") },
-  { id: "c4", label: "Electronics", imageUrl: img("electronics") },
+type Category = {
+  id: string;
+  label: string;
+  icon: ComponentProps<typeof Ionicons>["name"];
+};
+
+export const sameDayCategories: Category[] = [
+  { id: "c1", label: "Beauty & Personal Care", icon: "flower-outline" },
+  { id: "c2", label: "Grocery", icon: "basket-outline" },
+  { id: "c3", label: "Home", icon: "home-outline" },
+  { id: "c4", label: "Electronics", icon: "headset-outline" },
 ];
 
 export const buyAgain: Product[] = [
