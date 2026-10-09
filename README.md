@@ -12,11 +12,11 @@ The app was built against screenshots taken from the Amazon.ca phone app. I blur
 
 | Screen | Reference | Route |
 | --- | --- | --- |
-| Home | `reference/home.jpg` | `/(tabs)/index` |
-| Same-Day Store | `reference/same-day.jpg` | `/same-day` |
-| Haul | `reference/haul.jpg` | `/haul` |
-| Profile (You) | `reference/profile.jpg` | `/(tabs)/you` |
-| Cart | `reference/cart.jpg` | `/(tabs)/cart` |
+| Home | `Reference/Home_tab.jpg` | `/(tabs)/index` |
+| Same-Day Store | `Reference/Same_day_delivery_tab.jpg` | `/same-day` |
+| Haul | `Reference/Haul_tab.jpg` | `/haul` |
+| Profile (You) | `Reference/user_button.jpg` | `/(tabs)/you` |
+| Cart | `Reference/cart_button.jpg` | `/(tabs)/cart` |
 
 A sixth screen, Menu (`/(tabs)/menu`), completes the four-icon tab bar.
 
@@ -43,6 +43,7 @@ src/
 ├── data/           Mock data
 └── types/          TypeScript types
 assets/images/      Local images (products/ and the flag)
+Reference/          Reference screenshots from the Amazon.ca app
 ```
 
 ## Components
@@ -69,16 +70,15 @@ assets/images/      Local images (products/ and the flag)
 - Every component has a typed props object (`XxxProps`), named exports, and a PascalCase file name.
 - Screens live in `src/app`; everything else lives outside it.
 - Colors, spacing, radius, and font sizes come from `src/constants/theme.ts`.
-- Icons come from `@expo/vector-icons` (Ionicons) instead of the unicode characters I used in the last assignment, so they scale and are easier to maintain.
+- Icons come from `@expo/vector-icons` (Ionicons) instead of the unicode characters used in the last assignment, so they scale and are easier to maintain.
 - Lists use stable `id` keys from the data.
 
 ## Images
 
 - Product images in `assets/images/products/` were cropped from the reference screenshots of the Amazon.ca app, since this is for educational use only.
-- `assets/images/canada_flag.jpg` is a downloaded flag image from google free images.
+- `assets/images/canada_flag.jpg` is a freely available flag image downloaded from the web.
 - No images are loaded from the network.
 
-
-## Tech ressources/dependancies used:
+## Tech resources and dependencies
 
 Expo SDK 57, Expo Router, React Native, TypeScript, `expo-linear-gradient`, `@expo/vector-icons`.
