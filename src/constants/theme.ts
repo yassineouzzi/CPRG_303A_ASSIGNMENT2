@@ -25,6 +25,7 @@ export const colors = {
   textSecondary: "#565959",
   border: "#C5C5C7",
   divider: "#EBEDEC",
+  haulDark: "#161E26",
 } as const;
 
 export const spacing = {
